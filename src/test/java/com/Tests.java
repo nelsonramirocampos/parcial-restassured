@@ -20,6 +20,9 @@ public class Tests {
         extent = new ExtentReports();
 
         extent.attachReporter(spark);
+
+        RestAssured.baseURI = "https://parabank.dedosmedia.com";
+        RestAssured.basePath = "/parabank";
     }
 
     @Test
@@ -36,7 +39,7 @@ public class Tests {
                         .given()
                         .log().all()
                         .when()
-                        .get("https://parabank.parasoft.com/parabank/register.htm");
+                        .get("/register.htm");
 
         
         test.log(Status.INFO, "Response Body: " + response.body().print());
@@ -62,12 +65,12 @@ public class Tests {
         RestAssured
                 .given()
                 .log().all()
-                //.auth().basic("pepe", "pepe")
-                .queryParam("customerId", "12545")
+                .auth().basic("a", "a")
+                .queryParam("customerId", "14876")
                 .queryParam("newAccountType", "1")
-                .queryParam("fromAccountId", "124123")
+                .queryParam("fromAccountId", "17562")
                 .when()
-                .post("https://parabank.parasoft.com/parabank/services_proxy/bank/createAccount");
+                .post("/services_proxy/bank/createAccount");
 
 
         test.log(Status.INFO, "Response Body: " + response.body().print());
@@ -94,9 +97,11 @@ public class Tests {
         Response response =
                 RestAssured
                         .given()
+                        //.auth().basic("a", "a")
+                        .cookie("JSESSIONID", "0DFB9DA99891D9BC8861EDF3C6C6FE5C")
                         .log().all()
                         .when()
-                        .get("https://parabank.parasoft.com/parabank/overview.htm");
+                        .get("/overview.htm");
 
         test.log(Status.INFO, "Response Body: " + response.body().print());
 
@@ -122,12 +127,12 @@ public class Tests {
                 RestAssured
                         .given()
                         .log().all()
-                        //.auth().basic("a", "a")
+                        .auth().basic("a", "a")
                         .queryParam("fromAccountId", "13566")
                         .queryParam("toAccountId", "13677")
                         .queryParam("amount","100")
                         .when()
-                        .post("https://parabank.parasoft.com/parabank/services_proxy/bank/transfer");
+                        .post("/services_proxy/bank/transfer");
 
         test.log(Status.INFO, "Response Body: " + response.body().print());
 
@@ -153,9 +158,9 @@ public class Tests {
                 RestAssured
                         .given()
                         .log().all()
-                        //.auth().basic("a", "a")
+                        .auth().basic("a", "a")
                         .when()
-                        .get("https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/13566/transactions/month/All/type/Al");
+                        .get("/services_proxy/bank/accounts/18228/transactions/month/All/type/All");
 
         test.log(Status.INFO, "Response Body: " + response.body().print());
 

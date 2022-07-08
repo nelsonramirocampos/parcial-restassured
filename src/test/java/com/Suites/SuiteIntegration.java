@@ -1,4 +1,4 @@
-package com;
+package com.Suites;
 
 import org.junit.platform.suite.api.IncludeTags;
 import org.junit.platform.suite.api.SelectPackages;
