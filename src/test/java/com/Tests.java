@@ -23,6 +23,8 @@ public class Tests {
 
         RestAssured.baseURI = "https://parabank.dedosmedia.com";
         RestAssured.basePath = "/parabank";
+
+        RestAssured.useRelaxedHTTPSValidation();
     }
 
     @Test
@@ -60,7 +62,6 @@ public class Tests {
         ExtentTest test = extent.createTest("TC - Abrir una nueva cuenta");
         test.info("Inicio test 02");
         
-        //Falta autorizacion
         Response response =
         RestAssured
                 .given()
@@ -93,12 +94,12 @@ public class Tests {
 
         test.info("Inicio de test");
 
-        //Ver error 500
+        //Se necesita obtener el token antes de ejecutarlo
         Response response =
                 RestAssured
                         .given()
                         //.auth().basic("a", "a")
-                        .cookie("JSESSIONID", "0DFB9DA99891D9BC8861EDF3C6C6FE5C")
+                        .cookie("JSESSIONID", "88541B798055E768A3C67BE20E2AE308")
                         .log().all()
                         .when()
                         .get("/overview.htm");
@@ -122,7 +123,6 @@ public class Tests {
 
         test.info("Inicio de test");
 
-        //Falta autorizacion
         Response response =
                 RestAssured
                         .given()
@@ -153,7 +153,6 @@ public class Tests {
 
         test.info("Inicio de test");
 
-        //Falta autorizacion
         Response response =
                 RestAssured
                         .given()
